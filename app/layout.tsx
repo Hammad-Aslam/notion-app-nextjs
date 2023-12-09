@@ -37,7 +37,7 @@ export default function RootLayout({
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
-          storageKey="notion-theme"
+          storageKey="jotion-theme"
         >
           {children}
         </ThemeProvider>

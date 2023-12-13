@@ -107,7 +107,9 @@ const NavigationPage = () => {
           <UserItem />
         </div>
         <div className="mt-4">
-          <p>Documents</p>
+          {documents?.map((document: any) => (
+            <p key={document._id}>{document.title}</p>
+          ))}
         </div>
         <div
           onMouseDown={handleMouseDown}

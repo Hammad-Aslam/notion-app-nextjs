@@ -6,14 +6,19 @@ import { usePathname } from "next/navigation";
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
 import { UserItem } from "./user-items";
+import { useMutation, useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
 const NavigationPage = () => {
   const pathname = usePathname();
   const isMobile = useMediaQuery("(max-width: 768px)");
+  // const create = useMutation();
+  const documents = useQuery(api.documents.getSearch);
   const isResizingRef = useRef(false);
   const sidebarRef = useRef<ElementRef<"aside">>(null);
   const navbarRef = useRef<ElementRef<"div">>(null);
   const [isResetting, setIsResetting] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(isMobile);
+
   useEffect(() => {
     if (isMobile) {
       collapse();

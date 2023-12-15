@@ -32,7 +32,6 @@ const NavigationPage = () => {
   const pathname = usePathname();
   const router = useRouter();
   const isMobile = useMediaQuery("(max-width: 768px)");
-  // const create = useMutation();
   const create = useMutation(api.documents.create);
   const isResizingRef = useRef(false);
   const sidebarRef = useRef<ElementRef<"aside">>(null);

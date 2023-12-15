@@ -1,9 +1,7 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import {
-  ChevronLeft,
-  Menu,
+  ChevronsLeft,
   MenuIcon,
   Plus,
   PlusCircle,
@@ -11,35 +9,42 @@ import {
   Settings,
   Trash,
 } from "lucide-react";
-import { usePathname, useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
-import { UserItem } from "./user-items";
 import { useMutation } from "convex/react";
-import { api } from "@/convex/_generated/api";
-import { Item } from "./item";
 import { toast } from "sonner";
-import { useSearch } from "@/hooks/use-search";
-import { useSettings } from "@/hooks/use-settings";
-import { DocumentList } from "./document-list";
+
+import { cn } from "@/lib/utils";
+import { api } from "@/convex/_generated/api";
 import {
   Popover,
-  PopoverContent,
   PopoverTrigger,
+  PopoverContent,
 } from "@/components/ui/popover";
+import { useSearch } from "@/hooks/use-search";
+import { useSettings } from "@/hooks/use-settings";
+
+import { UserItem } from "./user-item";
+import { Item } from "./item";
+import { DocumentList } from "./document-list";
 import { TrashBox } from "./trash-box";
-const NavigationPage = () => {
-  const pathname = usePathname();
+import { Navbar } from "./navbar";
+
+export const Navigation = () => {
   const router = useRouter();
+  const settings = useSettings();
+  const search = useSearch();
+  const params = useParams();
+  const pathname = usePathname();
   const isMobile = useMediaQuery("(max-width: 768px)");
   const create = useMutation(api.documents.create);
+
   const isResizingRef = useRef(false);
   const sidebarRef = useRef<ElementRef<"aside">>(null);
   const navbarRef = useRef<ElementRef<"div">>(null);
   const [isResetting, setIsResetting] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(isMobile);
-  const search = useSearch();
-  const settings = useSettings();
 
   useEffect(() => {
     if (isMobile) {
@@ -54,20 +59,25 @@ const NavigationPage = () => {
       collapse();
     }
   }, [pathname, isMobile]);
+
   const handleMouseDown = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     event.preventDefault();
     event.stopPropagation();
+
     isResizingRef.current = true;
     document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseup", handleMouseUp);
   };
+
   const handleMouseMove = (event: MouseEvent) => {
     if (!isResizingRef.current) return;
     let newWidth = event.clientX;
+
     if (newWidth < 240) newWidth = 240;
     if (newWidth > 480) newWidth = 480;
+
     if (sidebarRef.current && navbarRef.current) {
       sidebarRef.current.style.width = `${newWidth}px`;
       navbarRef.current.style.setProperty("left", `${newWidth}px`);
@@ -98,6 +108,7 @@ const NavigationPage = () => {
       setTimeout(() => setIsResetting(false), 300);
     }
   };
+
   const collapse = () => {
     if (sidebarRef.current && navbarRef.current) {
       setIsCollapsed(true);
@@ -109,6 +120,7 @@ const NavigationPage = () => {
       setTimeout(() => setIsResetting(false), 300);
     }
   };
+
   const handleCreate = () => {
     const promise = create({ title: "Untitled" }).then((documentId) =>
       router.push(`/documents/${documentId}`)
@@ -139,9 +151,8 @@ const NavigationPage = () => {
             isMobile && "opacity-100"
           )}
         >
-          <ChevronLeft className="h-6 w-6" />
+          <ChevronsLeft className="h-6 w-6" />
         </div>
-
         <div>
           <UserItem />
           <Item label="Search" icon={Search} isSearch onClick={search.onOpen} />
@@ -150,7 +161,7 @@ const NavigationPage = () => {
         </div>
         <div className="mt-4">
           <DocumentList />
-          <Item onClick={handleCreate} icon={Plus} label="Add a Page" />
+          <Item onClick={handleCreate} icon={Plus} label="Add a page" />
           <Popover>
             <PopoverTrigger className="w-full mt-4">
               <Item label="Trash" icon={Trash} />
@@ -177,18 +188,20 @@ const NavigationPage = () => {
           isMobile && "left-0 w-full"
         )}
       >
-        <nav className="bg-transparent px-3 py-2 w-full">
-          {isCollapsed && (
-            <MenuIcon
-              onClick={resetWidth}
-              role="button"
-              className="h-6 w-6 text-muted-foreground"
-            />
-          )}
-        </nav>
+        {!!params.documentId ? (
+          <Navbar isCollapsed={isCollapsed} onResetWidth={resetWidth} />
+        ) : (
+          <nav className="bg-transparent px-3 py-2 w-full">
+            {isCollapsed && (
+              <MenuIcon
+                onClick={resetWidth}
+                role="button"
+                className="h-6 w-6 text-muted-foreground"
+              />
+            )}
+          </nav>
+        )}
       </div>
     </>
   );
 };
-
-export default NavigationPage;

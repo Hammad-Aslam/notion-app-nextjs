@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Supercharge Your Notes ✨
 
-## Getting Started
+## Jotion Note Taking App
 
-First, run the development server:
+Introducing Jotion Note Taking App, a real-time, Notion-inspired note-taking application that elevates organization and creativity to new heights!
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Key Features:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- ⚡️ **Real-time Database:** Collaborate seamlessly and witness your notes update instantly across devices.
+- **Notion-style Editor:** Write, organize, and embed content with ease, just like your Notion bestie.
+- **Light & Dark Mode:** Switch themes to suit your mood and environment.
+- **Infinite Children Documents:** Dive deep into nested notes, creating intricate knowledge forests.
+- **Trash Can & Soft Delete:** Oops? No worries! Recover deleted notes or banish them forever with a click.
+- **Authentication:** Keep your notes private and secure with password protection.
+- **File Upload, Deletion, & Replacement:** Attach images, PDFs, and more to your notes, then manage them with ease.
+- **Dynamic Document Icons:** Watch your note icons morph in real-time to reflect their content. ‍♂️🪄
+- ➡️⬅️ **Expandable Sidebar:** Find what you need instantly with a customizable sidebar that pops out when you want it.
+- **Mobile Responsive:** Access and edit your notes on any device, from your phone to your tablet.
+- **Publish to the Web:** Share your brilliance with the world by publishing your notes as web pages. ✨
+- ↕️ **Collapsible Sidebar:** Need more space? Hide the sidebar with a click for a distraction-free writing zone. ‍♀️
+- **Landing Page:** Welcome visitors with a stylish landing page that sets the tone for your notes.
+- ️**Cover Images:** Personalize your notes with stunning cover images that capture their essence.
+- **Recover Deleted Files:** Never fear accidental deletion again! Recover lost files with a simple click. ‍♀️🪄
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Tech Stack:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Next.js 14
+- TypeScript
+- Tailwind CSS
+- Shadcn UI ✨
+- Clerk Auth
+- Convex Database ⚡️
+- Edge Store for Image Storage ️
+- Image React Block ️
 
-## Learn More
+### Ready to take your note-taking to the next level?
 
-To learn more about Next.js, take a look at the following resources:
+Head over to [Jotion App](https://notetake-app-hammad-aslam.vercel.app) to get started! ➡️
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Don't forget to leave your feedback and suggestions! We're always building a better note-taking experience for you.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Happy note-taking! ✍️
